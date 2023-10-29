@@ -154,7 +154,7 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
 
                 var Table = dataGridView1.Rows[i++];
                 Table.Cells["TableName"].Value = name;
-                Table.Cells["TableValue"].Value = line;
+                Table.Cells["TableValue"].Value = value;
             }
 
 
