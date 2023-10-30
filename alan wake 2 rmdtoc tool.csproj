@@ -17,7 +17,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -76,9 +76,21 @@
     <Compile Include="Controls\NTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\SearchBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchBox.designer.cs">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\StringTable\IStringTable.cs" />
     <Compile Include="Core\StringTable\RMDLTable.cs" />
     <Compile Include="Core\StringTable\StringTable.cs" />
+    <Compile Include="Forms\frmImageViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmImageViewer.Designer.cs">
+      <DependentUpon>frmImageViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,12 +103,20 @@
     <Compile Include="Forms\FrmStringTable.Designer.cs">
       <DependentUpon>FrmStringTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DDSCooker.cs" />
+    <Compile Include="Helper\DDSToBitmap.cs" />
     <Compile Include="Helper\FStream.cs" />
     <Compile Include="Helper\IStream.cs" />
     <Compile Include="Helper\MStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\rmdtoc.cs" />
+    <EmbeddedResource Include="Controls\SearchBox.resx">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmImageViewer.resx">
+      <DependentUpon>frmImageViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>

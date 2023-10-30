@@ -114,6 +114,15 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
 
         private void exportAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          
+        }
+
+        private void importAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void namesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             var sdf = new SaveFileDialog();
             sdf.Filter = "Text Files|*.txt";
             sdf.Title = "Save Text File";
@@ -124,7 +133,7 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             var sb = new System.Text.StringBuilder();
             foreach (var Table in stringtable as List<SrtingTableEntry>)
             {
-                sb.AppendLine(Table.Name + "=" + Table.Value);
+                sb.AppendLine(Table.Name);
             }
 
             File.WriteAllText(sdf.FileName, sb.ToString());
@@ -132,7 +141,27 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             MessageBox.Show("Done!");
         }
 
-        private void importAllToolStripMenuItem_Click(object sender, EventArgs e)
+        private void valuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sdf = new SaveFileDialog();
+            sdf.Filter = "Text Files|*.txt";
+            sdf.Title = "Save Text File";
+            sdf.FileName = Path.GetFileName(Stream.Name) + ".txt";
+            if (sdf.ShowDialog() != DialogResult.OK)
+                return;
+
+            var sb = new System.Text.StringBuilder();
+            foreach (var Table in stringtable as List<SrtingTableEntry>)
+            {
+                sb.AppendLine(Table.Value);
+            }
+
+            File.WriteAllText(sdf.FileName, sb.ToString());
+
+            MessageBox.Show("Done!");
+        }
+
+        private void namesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog();
             ofd.Filter = "Text Files|*.txt";
@@ -145,7 +174,52 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             int i = 0;
             foreach (var line in lines)
             {
-                var split = line.Split(new[] { '=' },2);
+                if (i >= dataGridView1.Rows.Count) break;
+                var Table = dataGridView1.Rows[i++];
+                Table.Cells["TableName"].Value = line;
+            }
+
+            MessageBox.Show("Done!");
+        }
+
+        private void valuesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Text Files|*.txt";
+            ofd.Title = "Select Text File";
+            ofd.FileName = Path.GetFileName(Stream.Name) + ".txt";
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+            var lines = File.ReadAllLines(ofd.FileName);
+            int i = 0;
+            foreach (var line in lines)
+            {
+                if (i >= dataGridView1.Rows.Count) break;
+
+                    var Table = dataGridView1.Rows[i++];
+                    Table.Cells["TableValue"].Value = line;
+     
+            }
+
+            MessageBox.Show("Done!");
+        }
+
+        private void bothToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Text Files|*.txt";
+            ofd.Title = "Select Text File";
+            ofd.FileName = Path.GetFileName(Stream.Name) + ".txt";
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+            var lines = File.ReadAllLines(ofd.FileName);
+            int i = 0;
+            foreach (var line in lines)
+            {
+                if (i >= dataGridView1.Rows.Count) break;
+                var split = line.Split(new[] { '=' }, 2);
                 if (split.Length != 2)
                     continue;
 
@@ -157,11 +231,41 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
                 Table.Cells["TableValue"].Value = value;
             }
 
-
             MessageBox.Show("Done!");
+        }
 
+        private void bothToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var sdf = new SaveFileDialog();
+            sdf.Filter = "Text Files|*.txt";
+            sdf.Title = "Save Text File";
+            sdf.FileName = Path.GetFileName(Stream.Name) + ".txt";
+            if (sdf.ShowDialog() != DialogResult.OK)
+                return;
 
+            var sb = new System.Text.StringBuilder();
+            foreach (var Table in stringtable as List<SrtingTableEntry>)
+            {
+                sb.AppendLine(Table.Name+"="+ Table.Value);
+            }
+        }
 
+        private void FrmStringTable_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                searchBox1.Visible = true;
+            }
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            searchBox1.Visible = true;
         }
     }
 }

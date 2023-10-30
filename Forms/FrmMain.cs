@@ -166,16 +166,62 @@ namespace alan_wake_2_rmdtoc_Tool
 
             if (fileInfo.Name == "string_table.bin" || fileInfo.GetId() == "RMDL")
             {
-                var MStream = new MStream(fileInfo.GetFile());
+                var MStream = new MStream(fileInfo.Name, fileInfo.GetFile());
                 var frm = new FrmStringTable(MStream);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    fileInfo.IsEdited = true;
-                    fileInfo.NewFileBytes = MStream.ToArray();
-                    Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
-                    MessageBox.Show("Done!");
+                    try
+                    {
+                        fileInfo.IsEdited = true;
+                        fileInfo.NewFileBytes = MStream.ToArray();
+                        Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
+                        MessageBox.Show("Done!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
+            else if (fileInfo.Name.EndsWith(".png", StringComparison.InvariantCulture) ||
+                    fileInfo.Name.EndsWith(".jpg", StringComparison.InvariantCulture) ||
+                      fileInfo.Name.EndsWith(".bmp", StringComparison.InvariantCulture) ||
+                     fileInfo.Name.EndsWith(".tga", StringComparison.InvariantCulture) ||
+                fileInfo.Name.EndsWith(".dds", StringComparison.InvariantCulture) ||
+                fileInfo.Name.EndsWith(".tex", StringComparison.InvariantCulture))
+            {
+                try
+                {
+                    var MStream = new MStream(fileInfo.Name, fileInfo.GetFile());
+                    var frm = new frmImageViewer(MStream);
+                    frm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
+        }
+
+        private void exportRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderDialog folderDialog = new FolderDialog();
+            if (folderDialog.ShowDialog() != DialogResult.OK)
+                return;
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                var fileInfo = item.Tag as FileInfo;
+                File.WriteAllBytes(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetRow());
+            }
+
+            MessageBox.Show("Done!");
+        }
+
+        private void imageViewerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmImageViewer().Show();
         }
     }
 }

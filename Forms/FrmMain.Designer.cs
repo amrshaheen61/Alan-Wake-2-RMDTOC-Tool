@@ -49,11 +49,14 @@ namespace alan_wake_2_rmdtoc_Tool
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringTableEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.exportRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new Controls.NTreeView();
             this.listView1 = new Controls.NListView();
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Offset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RMDBLOBPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -73,9 +76,10 @@ namespace alan_wake_2_rmdtoc_Tool
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eportSelectedToolStripMenuItem,
-            this.replaceSelectedFileToolStripMenuItem});
+            this.replaceSelectedFileToolStripMenuItem,
+            this.exportRowToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
             // 
             // eportSelectedToolStripMenuItem
             // 
@@ -181,7 +185,8 @@ namespace alan_wake_2_rmdtoc_Tool
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stringTableEditorToolStripMenuItem});
+            this.stringTableEditorToolStripMenuItem,
+            this.imageViewerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -209,6 +214,17 @@ namespace alan_wake_2_rmdtoc_Tool
             this.splitContainer1.Size = new System.Drawing.Size(794, 446);
             this.splitContainer1.SplitterDistance = 264;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // exportRowToolStripMenuItem
+            // 
+            this.exportRowToolStripMenuItem.Name = "exportRowToolStripMenuItem";
+            this.exportRowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.exportRowToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.exportRowToolStripMenuItem.Text = "Export Row";
+            this.exportRowToolStripMenuItem.Visible = false;
+            this.exportRowToolStripMenuItem.Click += new System.EventHandler(this.exportRowToolStripMenuItem_Click);
             // 
             // treeView1
             // 
@@ -238,7 +254,8 @@ namespace alan_wake_2_rmdtoc_Tool
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.FileName,
             this.Offset,
-            this.Size});
+            this.Size,
+            this.RMDBLOBPath});
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.listView1.HideSelection = false;
@@ -267,6 +284,17 @@ namespace alan_wake_2_rmdtoc_Tool
             // 
             this.Size.Text = "Size";
             this.Size.Width = 193;
+            // 
+            // RMDBLOBPath
+            // 
+            this.RMDBLOBPath.Text = "RMDBLOB Archive Path";
+            // 
+            // imageViewerToolStripMenuItem
+            // 
+            this.imageViewerToolStripMenuItem.Name = "imageViewerToolStripMenuItem";
+            this.imageViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageViewerToolStripMenuItem.Text = "Image Viewer";
+            this.imageViewerToolStripMenuItem.Click += new System.EventHandler(this.imageViewerToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -321,6 +349,9 @@ namespace alan_wake_2_rmdtoc_Tool
         private System.Windows.Forms.ToolStripMenuItem replaceSelectedFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem exportRowToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader RMDBLOBPath;
+        private System.Windows.Forms.ToolStripMenuItem imageViewerToolStripMenuItem;
     }
 }
 
