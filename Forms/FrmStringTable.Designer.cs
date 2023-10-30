@@ -40,7 +40,7 @@
             this.importAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.namesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.valuesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bothToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportAllBoth = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TableValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,28 +107,28 @@
             this.valuesToolStripMenuItem,
             this.bothToolStripMenuItem1});
             this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportAllToolStripMenuItem.Text = "Export All";
             this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
             // 
             // namesToolStripMenuItem
             // 
             this.namesToolStripMenuItem.Name = "namesToolStripMenuItem";
-            this.namesToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.namesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.namesToolStripMenuItem.Text = "Names";
             this.namesToolStripMenuItem.Click += new System.EventHandler(this.namesToolStripMenuItem_Click);
             // 
             // valuesToolStripMenuItem
             // 
             this.valuesToolStripMenuItem.Name = "valuesToolStripMenuItem";
-            this.valuesToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.valuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.valuesToolStripMenuItem.Text = "Values";
             this.valuesToolStripMenuItem.Click += new System.EventHandler(this.valuesToolStripMenuItem_Click);
             // 
             // bothToolStripMenuItem1
             // 
             this.bothToolStripMenuItem1.Name = "bothToolStripMenuItem1";
-            this.bothToolStripMenuItem1.Size = new System.Drawing.Size(111, 22);
+            this.bothToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.bothToolStripMenuItem1.Text = "Both";
             this.bothToolStripMenuItem1.Click += new System.EventHandler(this.bothToolStripMenuItem1_Click);
             // 
@@ -137,32 +137,32 @@
             this.importAllToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.namesToolStripMenuItem1,
             this.valuesToolStripMenuItem1,
-            this.bothToolStripMenuItem});
+            this.ImportAllBoth});
             this.importAllToolStripMenuItem.Name = "importAllToolStripMenuItem";
-            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.importAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importAllToolStripMenuItem.Text = "Import All";
             this.importAllToolStripMenuItem.Click += new System.EventHandler(this.importAllToolStripMenuItem_Click);
             // 
             // namesToolStripMenuItem1
             // 
             this.namesToolStripMenuItem1.Name = "namesToolStripMenuItem1";
-            this.namesToolStripMenuItem1.Size = new System.Drawing.Size(111, 22);
+            this.namesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.namesToolStripMenuItem1.Text = "Names";
             this.namesToolStripMenuItem1.Click += new System.EventHandler(this.namesToolStripMenuItem1_Click);
             // 
             // valuesToolStripMenuItem1
             // 
             this.valuesToolStripMenuItem1.Name = "valuesToolStripMenuItem1";
-            this.valuesToolStripMenuItem1.Size = new System.Drawing.Size(111, 22);
+            this.valuesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.valuesToolStripMenuItem1.Text = "Values";
             this.valuesToolStripMenuItem1.Click += new System.EventHandler(this.valuesToolStripMenuItem1_Click);
             // 
-            // bothToolStripMenuItem
+            // ImportAllBoth
             // 
-            this.bothToolStripMenuItem.Name = "bothToolStripMenuItem";
-            this.bothToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
-            this.bothToolStripMenuItem.Text = "Both";
-            this.bothToolStripMenuItem.Click += new System.EventHandler(this.bothToolStripMenuItem_Click);
+            this.ImportAllBoth.Name = "ImportAllBoth";
+            this.ImportAllBoth.Size = new System.Drawing.Size(180, 22);
+            this.ImportAllBoth.Text = "Both";
+            this.ImportAllBoth.Click += new System.EventHandler(this.bothToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -250,7 +250,7 @@
         private System.Windows.Forms.ToolStripMenuItem valuesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem namesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem valuesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem bothToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImportAllBoth;
         private System.Windows.Forms.ToolStripMenuItem bothToolStripMenuItem1;
         private Controls.SearchBox searchBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

@@ -79,14 +79,14 @@ namespace alan_wake_2_rmdtoc_Tool
             this.replaceSelectedFileToolStripMenuItem,
             this.exportRowToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 92);
             // 
             // eportSelectedToolStripMenuItem
             // 
             this.eportSelectedToolStripMenuItem.Enabled = false;
             this.eportSelectedToolStripMenuItem.Name = "eportSelectedToolStripMenuItem";
-            this.eportSelectedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eportSelectedToolStripMenuItem.Text = "Eport Selected";
+            this.eportSelectedToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.eportSelectedToolStripMenuItem.Text = "Export Selected";
             this.eportSelectedToolStripMenuItem.Click += new System.EventHandler(this.eportSelectedToolStripMenuItem_Click);
             // 
             // replaceSelectedFileToolStripMenuItem

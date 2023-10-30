@@ -248,6 +248,7 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             {
                 sb.AppendLine(Table.Name+"="+ Table.Value);
             }
+            File.WriteAllText(sdf.FileName, sb.ToString());
         }
 
         private void FrmStringTable_KeyDown(object sender, KeyEventArgs e)
