@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 using static Helper.DDSCooker;
 
 namespace Helper
@@ -19,13 +18,13 @@ namespace Helper
         {
             Bitmap res = new Bitmap((w < 4) ? 4 : w, (h < 4) ? 4 : h);
 
-                    for (int j = 0; j < h; j += 4)
-                    {
-                        for (int i = 0; i < w; i += 4)
-                        {
-                            DecompressBlockDXT1(i, j, stream.GetBytes(8), res);
-                        }
-                    }
+            for (int j = 0; j < h; j += 4)
+            {
+                for (int i = 0; i < w; i += 4)
+                {
+                    DecompressBlockDXT1(i, j, stream.GetBytes(8), res);
+                }
+            }
             return res;
         }
 
@@ -107,13 +106,13 @@ namespace Helper
         {
             Bitmap res = new Bitmap((w < 4) ? 4 : w, (h < 4) ? 4 : h);
 
-                    for (int j = 0; j < h; j += 4)
-                    {
-                        for (int i = 0; i < w; i += 4)
-                        {
-                            DecompressBlockDXT5(i, j, stream.GetBytes(16), res);
-                        }
-                    }
+            for (int j = 0; j < h; j += 4)
+            {
+                for (int i = 0; i < w; i += 4)
+                {
+                    DecompressBlockDXT5(i, j, stream.GetBytes(16), res);
+                }
+            }
             return res;
         }
 
@@ -231,7 +230,7 @@ namespace Helper
                     {
                         for (int t = 0; t < w; t += 4)
                         {
-                            blockStorage=stream.GetBytes(bufferSize, false, ptr);
+                            blockStorage = stream.GetBytes(bufferSize, false, ptr);
                             ptr += bufferSize;
                             {
                                 int color0 = blockStorage[8] | blockStorage[9] << 8;
@@ -328,7 +327,7 @@ namespace Helper
             for (int y = 0; y < bitmap.Height; y++)
             {
                 for (int x = 0; x < bitmap.Width; x++)
-                { 
+                {
                     uint RGBABits = stream.GetUIntValue();
                     int b = GetMaskValue(BBitMask, RGBABits);
                     int g = GetMaskValue(GBitMask, RGBABits);
@@ -515,14 +514,14 @@ namespace Helper
             info = DDSCooker.DdsToTex(DDSBytes);
 
             var stream = new MStream(info.Data);
-           
-            return GetBitMapFromDDS(info.Format, stream); 
+
+            return GetBitMapFromDDS(info.Format, stream);
         }
 
 
         public static Bitmap Convert(IStream stream)
         {
-            info= DDSCooker.DdsToTex(stream);
+            info = DDSCooker.DdsToTex(stream);
             return GetBitMapFromDDS(info.Format, stream);
         }
 

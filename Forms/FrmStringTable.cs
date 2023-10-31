@@ -114,7 +114,7 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
 
         private void exportAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void importAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -197,9 +197,9 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             {
                 if (i >= dataGridView1.Rows.Count) break;
 
-                    var Table = dataGridView1.Rows[i++];
-                    Table.Cells["TableValue"].Value = line;
-     
+                var Table = dataGridView1.Rows[i++];
+                Table.Cells["TableValue"].Value = line;
+
             }
 
             MessageBox.Show("Done!");
@@ -246,7 +246,7 @@ namespace alan_wake_2_rmdtoc_Tool.Forms
             var sb = new System.Text.StringBuilder();
             foreach (var Table in stringtable as List<SrtingTableEntry>)
             {
-                sb.AppendLine(Table.Name+"="+ Table.Value);
+                sb.AppendLine(Table.Name + "=" + Table.Value);
             }
             File.WriteAllText(sdf.FileName, sb.ToString());
         }

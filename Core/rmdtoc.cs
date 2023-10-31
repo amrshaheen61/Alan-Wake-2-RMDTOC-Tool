@@ -63,7 +63,7 @@ namespace alan_wake_2_rmdtoc_Tool
             NameLength = stream.Get<int>();
             Hash = stream.Get<ulong>();
         }
-        
+
         public void Write(IStream stream)
         {
             stream.SetIntValue(NameOffset);
@@ -268,12 +268,12 @@ namespace alan_wake_2_rmdtoc_Tool
 
         public string GetRMDBLOBPath()
         {
-            if(CompressInfos.Count==0)
+            if (CompressInfos.Count == 0)
             {
                 return "";
             }
 
-            return Path.GetFullPath( Path.Combine(Path.GetDirectoryName(Rmdtoc.rmdtocStream.Name), Rmdtoc.RMDBLOBPaths[CompressInfos[0].FileIndex].Path));
+            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Rmdtoc.rmdtocStream.Name), Rmdtoc.RMDBLOBPaths[CompressInfos[0].FileIndex].Path));
         }
         public byte[] GetRow()
         {
@@ -302,7 +302,7 @@ namespace alan_wake_2_rmdtoc_Tool
                 }
                 DecompressBuffer.SetStringValue("End of File");
 
-              stream.Close();
+                stream.Close();
             }
 
 
@@ -310,7 +310,7 @@ namespace alan_wake_2_rmdtoc_Tool
 
 
 
-        } 
+        }
         public string GetId()
         {
             if (CompressInfos.Count == 0)
@@ -418,7 +418,7 @@ namespace alan_wake_2_rmdtoc_Tool
             NameTable = new MStream(BufferStream.GetBytes(header.Names_Size, SeekToOffset: header.Names_Offset));
 
 
-            RMDBLOBPaths=new List<RMDBLOBPath>();
+            RMDBLOBPaths = new List<RMDBLOBPath>();
             for (int i = 0; i < header.RMDBLOB_Path_Count; i++)
             {
                 var path = new RMDBLOBPath();
@@ -467,9 +467,8 @@ namespace alan_wake_2_rmdtoc_Tool
 
             Root = new TreeNode(Path.GetFileNameWithoutExtension(Folders[0].Name));
             Root.Tag = Folders[0];
-            var Temp = Root;
             MakeNode(Folders, Root, Folders[0]);
-            Root = Temp;
+
 
         }
 
@@ -477,13 +476,10 @@ namespace alan_wake_2_rmdtoc_Tool
         {
             for (int i = Folder.FolderIndex; i < Folder.FolderIndex + Folder.FolderCount; i++)
             {
-                Root = new TreeNode(folders[i].Name);
-                Root.Tag = folders[i];
-
-                node.Nodes.Add(Root);
-                MakeNode(folders, Root, folders[i]);
-
-
+               var treenode = new TreeNode(folders[i].Name);
+                treenode.Tag = folders[i];
+                node.Nodes.Add(treenode);
+                MakeNode(folders, treenode, folders[i]);
             }
         }
 
@@ -558,7 +554,7 @@ namespace alan_wake_2_rmdtoc_Tool
             header.RMDBLOB_Path_Offset = (int)BufferStream.Position;
             BufferStream.SetBytes(RMDBLOBPathBlock.ToArray());
 
-            header.Table_1_Offset=(int)BufferStream.Position;
+            header.Table_1_Offset = (int)BufferStream.Position;
             BufferStream.SetBytes(Table1.ToArray());
 
             header.Table_2_Offset = (int)BufferStream.Position;

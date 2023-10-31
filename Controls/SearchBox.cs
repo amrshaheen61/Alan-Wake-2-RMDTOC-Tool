@@ -41,7 +41,7 @@ namespace Controls
         private void FindNext_Click(object sender, EventArgs e)
         {
             bool found = false;
-         
+
             for (int rowIndex = CurrentRowIndex; rowIndex < DataGridView.Rows.Count; rowIndex++)
             {
                 for (int colIndex = CurrentColumnIndex + 1; colIndex < DataGridView.Columns.Count; colIndex++)
@@ -61,13 +61,13 @@ namespace Controls
                 if (found)
                     break;
 
-                
+
                 CurrentColumnIndex = -1;
             }
 
             if (!found)
             {
-                
+
                 for (int rowIndex = 0; rowIndex < DataGridView.Rows.Count; rowIndex++)
                 {
                     for (int colIndex = 0; colIndex < DataGridView.Columns.Count; colIndex++)
@@ -118,7 +118,7 @@ namespace Controls
                 if (found)
                     break;
 
-                
+
                 CurrentColumnIndex = DataGridView.Columns.Count;
             }
 
@@ -187,7 +187,7 @@ namespace Controls
 
         public new void Show()
         {
-            if (DataGridView.CurrentCell!=null)
+            if (DataGridView.CurrentCell != null)
             {
                 InputSearch.Text = DataGridView.CurrentCell.Value.ToString();
             }

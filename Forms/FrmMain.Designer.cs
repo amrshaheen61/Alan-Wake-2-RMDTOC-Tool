@@ -55,7 +55,6 @@ namespace alan_wake_2_rmdtoc_Tool
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Offset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RMDBLOBPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -79,7 +78,7 @@ namespace alan_wake_2_rmdtoc_Tool
             this.replaceSelectedFileToolStripMenuItem,
             this.exportRowToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
             // 
             // eportSelectedToolStripMenuItem
             // 
@@ -254,8 +253,7 @@ namespace alan_wake_2_rmdtoc_Tool
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.FileName,
             this.Offset,
-            this.Size,
-            this.RMDBLOBPath});
+            this.Size});
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.listView1.HideSelection = false;
@@ -284,10 +282,6 @@ namespace alan_wake_2_rmdtoc_Tool
             // 
             this.Size.Text = "Size";
             this.Size.Width = 193;
-            // 
-            // RMDBLOBPath
-            // 
-            this.RMDBLOBPath.Text = "RMDBLOB Archive Path";
             // 
             // imageViewerToolStripMenuItem
             // 
@@ -350,7 +344,6 @@ namespace alan_wake_2_rmdtoc_Tool
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem exportRowToolStripMenuItem;
-        private System.Windows.Forms.ColumnHeader RMDBLOBPath;
         private System.Windows.Forms.ToolStripMenuItem imageViewerToolStripMenuItem;
     }
 }

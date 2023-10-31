@@ -32,8 +32,10 @@ namespace Helper
             Position = 0;
         }
 
-        public MStream(string FileName, byte[] FileData) : base(FileData)
+        public MStream(string FileName, byte[] FileData) : base(0)
         {
+            Write(FileData, 0, FileData.Length);
+            Position = 0;
             Name = FileName;
         }
 
