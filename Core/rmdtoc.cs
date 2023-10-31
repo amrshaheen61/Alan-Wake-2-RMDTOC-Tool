@@ -263,7 +263,8 @@ namespace alan_wake_2_rmdtoc_Tool
 
         public string GetRMDBLOBPath(CompressInfo info)
         {
-            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Rmdtoc.rmdtocStream.Name), Rmdtoc.RMDBLOBPaths[info.FileIndex].Path));
+            var Rmdblobpath = Rmdtoc.RMDBLOBPaths[info.FileIndex].Path.Replace("../pc/", "");
+            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Rmdtoc.rmdtocStream.Name), Rmdblobpath));
         }
 
         public string GetRMDBLOBPath()
