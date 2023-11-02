@@ -35,7 +35,8 @@ namespace alan_wake_2_rmdtoc_Tool
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eportSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.replaceSelectedFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importfiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,14 +49,13 @@ namespace alan_wake_2_rmdtoc_Tool
             this.expotAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringTableEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.exportRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new Controls.NTreeView();
             this.listView1 = new Controls.NListView();
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Offset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -75,7 +75,7 @@ namespace alan_wake_2_rmdtoc_Tool
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eportSelectedToolStripMenuItem,
-            this.replaceSelectedFileToolStripMenuItem,
+            this.importfiles,
             this.exportRowToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
@@ -88,13 +88,24 @@ namespace alan_wake_2_rmdtoc_Tool
             this.eportSelectedToolStripMenuItem.Text = "Export Selected";
             this.eportSelectedToolStripMenuItem.Click += new System.EventHandler(this.eportSelectedToolStripMenuItem_Click);
             // 
-            // replaceSelectedFileToolStripMenuItem
+            // importfiles
             // 
-            this.replaceSelectedFileToolStripMenuItem.Enabled = false;
-            this.replaceSelectedFileToolStripMenuItem.Name = "replaceSelectedFileToolStripMenuItem";
-            this.replaceSelectedFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.replaceSelectedFileToolStripMenuItem.Text = "Replace selected file";
-            this.replaceSelectedFileToolStripMenuItem.Click += new System.EventHandler(this.replaceSelectedFileToolStripMenuItem_Click);
+            this.importfiles.Enabled = false;
+            this.importfiles.Name = "importfiles";
+            this.importfiles.Size = new System.Drawing.Size(229, 22);
+            this.importfiles.Text = "Import Files";
+            this.importfiles.Click += new System.EventHandler(this.importfiles_Click);
+            // 
+            // exportRowToolStripMenuItem
+            // 
+            this.exportRowToolStripMenuItem.Name = "exportRowToolStripMenuItem";
+            this.exportRowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.T)));
+            this.exportRowToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.exportRowToolStripMenuItem.Text = "Export Row";
+            this.exportRowToolStripMenuItem.Visible = false;
+            this.exportRowToolStripMenuItem.Click += new System.EventHandler(this.exportRowToolStripMenuItem_Click);
             // 
             // imageList2
             // 
@@ -197,6 +208,13 @@ namespace alan_wake_2_rmdtoc_Tool
             this.stringTableEditorToolStripMenuItem.Text = "StringTable Editor";
             this.stringTableEditorToolStripMenuItem.Click += new System.EventHandler(this.stringTableEditorToolStripMenuItem_Click);
             // 
+            // imageViewerToolStripMenuItem
+            // 
+            this.imageViewerToolStripMenuItem.Name = "imageViewerToolStripMenuItem";
+            this.imageViewerToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.imageViewerToolStripMenuItem.Text = "Image Viewer";
+            this.imageViewerToolStripMenuItem.Click += new System.EventHandler(this.imageViewerToolStripMenuItem_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,17 +231,6 @@ namespace alan_wake_2_rmdtoc_Tool
             this.splitContainer1.Size = new System.Drawing.Size(794, 446);
             this.splitContainer1.SplitterDistance = 264;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // exportRowToolStripMenuItem
-            // 
-            this.exportRowToolStripMenuItem.Name = "exportRowToolStripMenuItem";
-            this.exportRowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.T)));
-            this.exportRowToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.exportRowToolStripMenuItem.Text = "Export Row";
-            this.exportRowToolStripMenuItem.Visible = false;
-            this.exportRowToolStripMenuItem.Click += new System.EventHandler(this.exportRowToolStripMenuItem_Click);
             // 
             // treeView1
             // 
@@ -283,13 +290,6 @@ namespace alan_wake_2_rmdtoc_Tool
             this.Size.Text = "Size";
             this.Size.Width = 193;
             // 
-            // imageViewerToolStripMenuItem
-            // 
-            this.imageViewerToolStripMenuItem.Name = "imageViewerToolStripMenuItem";
-            this.imageViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.imageViewerToolStripMenuItem.Text = "Image Viewer";
-            this.imageViewerToolStripMenuItem.Click += new System.EventHandler(this.imageViewerToolStripMenuItem_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,7 +340,7 @@ namespace alan_wake_2_rmdtoc_Tool
         private System.Windows.Forms.ToolStripMenuItem expotAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stringTableEditorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem replaceSelectedFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importfiles;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem exportRowToolStripMenuItem;

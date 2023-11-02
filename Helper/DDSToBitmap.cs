@@ -225,13 +225,11 @@ namespace Helper
             {
                 using (BinaryWriter bitmapBW = new BinaryWriter(bitmapStream))
                 {
-                    int ptr = 0;
                     for (int s = 0; s < h; s += 4)
                     {
                         for (int t = 0; t < w; t += 4)
                         {
-                            blockStorage = stream.GetBytes(bufferSize, false, ptr);
-                            ptr += bufferSize;
+                            blockStorage = stream.GetBytes(bufferSize);
                             {
                                 int color0 = blockStorage[8] | blockStorage[9] << 8;
                                 int color1 = blockStorage[10] | blockStorage[11] << 8;

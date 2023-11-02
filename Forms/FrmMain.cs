@@ -4,6 +4,7 @@ using Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace alan_wake_2_rmdtoc_Tool
@@ -32,6 +33,10 @@ namespace alan_wake_2_rmdtoc_Tool
             foreach (var item in Tag.Files)
             {
                 var LVitem = new ListViewItem();
+
+                if (item.IsEdited)
+                    LVitem.Font = new System.Drawing.Font(LVitem.Font, System.Drawing.FontStyle.Bold);
+
                 LVitem.Text = item.Name;
                 LVitem.Tag = item;
                 LVitem.ImageIndex = 0;
@@ -77,7 +82,7 @@ namespace alan_wake_2_rmdtoc_Tool
 
             saveToolStripMenuItem.Enabled = true;
             expotAllToolStripMenuItem.Enabled = true;
-            replaceSelectedFileToolStripMenuItem.Enabled = true;
+            importfiles.Enabled = true;
             eportSelectedToolStripMenuItem.Enabled = true;
             toolToolStripMenuItem.Enabled = true;
         }
@@ -106,39 +111,7 @@ namespace alan_wake_2_rmdtoc_Tool
             new FrmStringTable().Show();
         }
 
-        private void replaceSelectedFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (listView1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("No file selected!");
-                return;
-            }
-
-            if (listView1.SelectedItems.Count > 1)
-            {
-                MessageBox.Show("Select only one file!");
-                return;
-            }
-
-            var ofd = new OpenFileDialog();
-            ofd.Filter = "All Files|*.*";
-            ofd.Title = "Select File";
-            if (ofd.ShowDialog() != DialogResult.OK)
-                return;
-
-            if (!File.Exists(ofd.FileName))
-            {
-                MessageBox.Show("File not found!");
-                return;
-            }
-
-            var fileInfo = listView1.SelectedItems[0].Tag as FileInfo;
-            fileInfo.IsEdited = true;
-            fileInfo.NewFileBytes = File.ReadAllBytes(ofd.FileName);
-            Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
-
-            MessageBox.Show("Done!, Don't forget to save!");
-        }
+        
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -222,6 +195,36 @@ namespace alan_wake_2_rmdtoc_Tool
         private void imageViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmImageViewer().Show();
+        }
+
+        private void importfiles_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Make sure that the files names in this list");
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "All Files|*.*";
+            ofd.Multiselect = true;
+            ofd.Title = "Select Files";
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+            var ImportedFiles = 0;
+            foreach(var FilePath in ofd.FileNames)
+            {
+                var item= listView1.Items.Cast<ListViewItem>().FirstOrDefault(x => x.Text == Path.GetFileName(FilePath));
+                if (item == null)
+                {
+                    MessageBox.Show($"File {Path.GetFileName(FilePath)} not found in list, the file will be ignored");
+                    continue;
+                }
+                var fileInfo = item.Tag as FileInfo;
+                fileInfo.IsEdited = true;
+                fileInfo.NewFileBytes = File.ReadAllBytes(FilePath);
+                Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
+                ImportedFiles++;
+
+                item.Font= new System.Drawing.Font(item.Font, System.Drawing.FontStyle.Bold);
+            }
+
+            MessageBox.Show($"Done! {ImportedFiles} files imported");
         }
     }
 }
