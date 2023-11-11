@@ -183,7 +183,8 @@ namespace alan_wake_2_rmdtoc_Tool
 
         public string Name;
         public bool IsEdited = false;
-        public byte[] NewFileBytes;
+        public object NewFileBytes;
+
 
 
         public void Read(IStream stream)
@@ -344,19 +345,40 @@ namespace alan_wake_2_rmdtoc_Tool
             var info = CompressInfos[0];
             var stream = new FStream(GetRMDBLOBPath(info), FileMode.Open, FileAccess.ReadWrite);
 
-            byte[] CompressedBytes;
+            byte[] CompressedBytes = null;
 
-            if (info.isCompressed != 0)
+            if (NewFileBytes.GetType().IsArray)
             {
-                info.BufferUSize = NewFileBytes.Length;
-                CompressedBytes = LZ4Codec.Encode(NewFileBytes, 0, info.BufferUSize);
-                info.BufferSize = CompressedBytes.Length;
+                var bytes = (byte[])NewFileBytes;
+                if (info.isCompressed != 0)
+                {
+                    info.BufferUSize = bytes.Length;
+                    CompressedBytes = LZ4Codec.Encode(bytes, 0, info.BufferUSize);
+                    info.BufferSize = CompressedBytes.Length;
+                }
+                else
+                {
+                    info.BufferUSize = bytes.Length;
+                    CompressedBytes = bytes;
+                    info.BufferSize = 0;
+                }
             }
-            else
+            else if (NewFileBytes is IStream)
             {
-                info.BufferUSize = NewFileBytes.Length;
-                CompressedBytes = NewFileBytes;
-                info.BufferSize = 0;
+
+                var bytes = ((IStream)NewFileBytes).ToArray();
+                if (info.isCompressed != 0)
+                {
+                    info.BufferUSize = bytes.Length;
+                    CompressedBytes = LZ4Codec.Encode(bytes, 0, info.BufferUSize);
+                    info.BufferSize = CompressedBytes.Length;
+                }
+                else
+                {
+                    info.BufferUSize = bytes.Length;
+                    CompressedBytes = bytes;
+                    info.BufferSize = 0;
+                }
             }
 
             /////
@@ -373,7 +395,16 @@ namespace alan_wake_2_rmdtoc_Tool
             stream.Close();
 
             IsEdited = false;
-            NewFileBytes = null;
+
+
+            if (NewFileBytes.GetType().IsArray)
+            {
+                NewFileBytes = null;
+            }
+            else if (NewFileBytes is IStream)
+            {
+                ((IStream)NewFileBytes).Close();
+            }
         }
 
 
@@ -477,7 +508,7 @@ namespace alan_wake_2_rmdtoc_Tool
         {
             for (int i = Folder.FolderIndex; i < Folder.FolderIndex + Folder.FolderCount; i++)
             {
-               var treenode = new TreeNode(folders[i].Name);
+                var treenode = new TreeNode(folders[i].Name);
                 treenode.Tag = folders[i];
                 node.Nodes.Add(treenode);
                 MakeNode(folders, treenode, folders[i]);

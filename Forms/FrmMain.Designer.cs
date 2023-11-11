@@ -51,6 +51,9 @@ namespace alan_wake_2_rmdtoc_Tool
             this.stringTableEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportSelectedFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToSelectedFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new Controls.NTreeView();
             this.listView1 = new Controls.NListView();
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -63,6 +66,7 @@ namespace alan_wake_2_rmdtoc_Tool
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -158,7 +162,7 @@ namespace alan_wake_2_rmdtoc_Tool
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -166,15 +170,16 @@ namespace alan_wake_2_rmdtoc_Tool
             // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolToolStripMenuItem
             // 
@@ -232,10 +237,33 @@ namespace alan_wake_2_rmdtoc_Tool
             this.splitContainer1.SplitterDistance = 264;
             this.splitContainer1.TabIndex = 2;
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportSelectedFolderToolStripMenuItem,
+            this.importToSelectedFolderToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(205, 48);
+            // 
+            // exportSelectedFolderToolStripMenuItem
+            // 
+            this.exportSelectedFolderToolStripMenuItem.Name = "exportSelectedFolderToolStripMenuItem";
+            this.exportSelectedFolderToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.exportSelectedFolderToolStripMenuItem.Text = "Export selected folder";
+            this.exportSelectedFolderToolStripMenuItem.Click += new System.EventHandler(this.exportSelectedFolderToolStripMenuItem_Click);
+            // 
+            // importToSelectedFolderToolStripMenuItem
+            // 
+            this.importToSelectedFolderToolStripMenuItem.Name = "importToSelectedFolderToolStripMenuItem";
+            this.importToSelectedFolderToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.importToSelectedFolderToolStripMenuItem.Text = "Import to selected folder";
+            this.importToSelectedFolderToolStripMenuItem.Click += new System.EventHandler(this.importToSelectedFolderToolStripMenuItem_Click);
+            // 
             // treeView1
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.Window;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeView1.ContextMenuStrip = this.contextMenuStrip2;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.treeView1.ImageIndex = 0;
@@ -310,6 +338,7 @@ namespace alan_wake_2_rmdtoc_Tool
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,6 +374,9 @@ namespace alan_wake_2_rmdtoc_Tool
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem exportRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageViewerToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem exportSelectedFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importToSelectedFolderToolStripMenuItem;
     }
 }
 

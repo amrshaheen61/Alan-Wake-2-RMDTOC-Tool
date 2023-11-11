@@ -1,8 +1,10 @@
 ﻿using alan_wake_2_rmdtoc_Tool.Forms;
 using Controls;
 using Helper;
+using LZ4;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -54,7 +56,7 @@ namespace alan_wake_2_rmdtoc_Tool
             foreach (ListViewItem item in listView1.SelectedItems)
             {
                 var fileInfo = item.Tag as FileInfo;
-                File.WriteAllBytes(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetFile());
+                SaveFile(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetFile());
             }
 
             MessageBox.Show("Done!");
@@ -102,7 +104,7 @@ namespace alan_wake_2_rmdtoc_Tool
             foreach (ListViewItem item in listView1.Items)
             {
                 var fileInfo = item.Tag as FileInfo;
-                File.WriteAllBytes(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetFile());
+                SaveFile(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetFile());
             }
         }
 
@@ -111,7 +113,7 @@ namespace alan_wake_2_rmdtoc_Tool
             new FrmStringTable().Show();
         }
 
-        
+
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -146,7 +148,7 @@ namespace alan_wake_2_rmdtoc_Tool
                     try
                     {
                         fileInfo.IsEdited = true;
-                        fileInfo.NewFileBytes = MStream.ToArray();
+                        fileInfo.NewFileBytes = MStream;
                         Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
                         MessageBox.Show("Done!");
                     }
@@ -186,7 +188,7 @@ namespace alan_wake_2_rmdtoc_Tool
             foreach (ListViewItem item in listView1.SelectedItems)
             {
                 var fileInfo = item.Tag as FileInfo;
-                File.WriteAllBytes(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetRow());
+                SaveFile(Path.Combine(folderDialog.FileName, fileInfo.Name), fileInfo.GetRow());
             }
 
             MessageBox.Show("Done!");
@@ -207,9 +209,9 @@ namespace alan_wake_2_rmdtoc_Tool
             if (ofd.ShowDialog() != DialogResult.OK)
                 return;
             var ImportedFiles = 0;
-            foreach(var FilePath in ofd.FileNames)
+            foreach (var FilePath in ofd.FileNames)
             {
-                var item= listView1.Items.Cast<ListViewItem>().FirstOrDefault(x => x.Text == Path.GetFileName(FilePath));
+                var item = listView1.Items.Cast<ListViewItem>().FirstOrDefault(x => x.Text == Path.GetFileName(FilePath));
                 if (item == null)
                 {
                     MessageBox.Show($"File {Path.GetFileName(FilePath)} not found in list, the file will be ignored");
@@ -217,14 +219,128 @@ namespace alan_wake_2_rmdtoc_Tool
                 }
                 var fileInfo = item.Tag as FileInfo;
                 fileInfo.IsEdited = true;
-                fileInfo.NewFileBytes = File.ReadAllBytes(FilePath);
+                fileInfo.NewFileBytes = FStream.Open(FilePath, FileMode.Open, FileAccess.Read);
                 Modifiedtrmdtoc.Add(fileInfo.Rmdtoc);
                 ImportedFiles++;
 
-                item.Font= new System.Drawing.Font(item.Font, System.Drawing.FontStyle.Bold);
+                item.Font = new System.Drawing.Font(item.Font, System.Drawing.FontStyle.Bold);
             }
 
             MessageBox.Show($"Done! {ImportedFiles} files imported");
+        }
+
+        private void exportSelectedFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("Select a folder first");
+                return;
+            }
+
+            FolderDialog folderDialog = new FolderDialog();
+            if (folderDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            var selectedNode = treeView1.SelectedNode;
+            var basefolder = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(folderDialog.FileName);
+
+            ExportFolder(selectedNode, Path.Combine(folderDialog.FileName, selectedNode.Text));
+
+            Directory.SetCurrentDirectory(basefolder);
+            MessageBox.Show("Done!");
+        }
+
+
+        void ExportFolder(TreeNode node, string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            var folderInfo = node.Tag as FolderInfo;
+            if (folderInfo == null)
+                return;
+
+            foreach (var item in folderInfo.Files)
+            {
+                SaveFile(Path.Combine(path, item.Name), item.GetFile());
+            }
+
+            foreach (TreeNode item in node.Nodes)
+            {
+                ExportFolder(item, Path.Combine(path, item.Text));
+            }
+
+          
+        }
+
+
+
+        void ImportFolder(TreeNode node, string path,ref int ImportedFiles)
+        {
+            var folderInfo = node.Tag as FolderInfo;
+            if (folderInfo == null)
+                return;
+
+            foreach (var item in folderInfo.Files)
+            {
+
+                if (File.Exists(Path.Combine(path, item.Name)))
+                {
+                    item.IsEdited = true;
+                    item.NewFileBytes = FStream.Open(Path.Combine(path, item.Name),FileMode.Open,FileAccess.Read);
+                    Modifiedtrmdtoc.Add(item.Rmdtoc);
+                    ImportedFiles++;
+                }
+            }
+
+            foreach (TreeNode item in node.Nodes)
+            {
+                ImportFolder(item, Path.Combine(path, item.Text), ref ImportedFiles);
+            }
+        }
+
+        private void importToSelectedFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            MessageBox.Show("Make sure that the files names in this folder in the folder you will select it");
+
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("Select a folder first");
+                return;
+            }
+
+            FolderDialog folderDialog = new FolderDialog();
+            if (folderDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            var ImportedFiles = 0;
+            var selectedNode = treeView1.SelectedNode;
+            var basefolder = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(folderDialog.FileName);
+            ImportFolder(selectedNode, Path.Combine(folderDialog.FileName, selectedNode.Text), ref ImportedFiles);    
+            Directory.SetCurrentDirectory(basefolder);
+
+
+            MessageBox.Show($"Done! {ImportedFiles} files imported");
+        }
+
+        void SaveFile(string FilePath , byte[] bytes)
+        {
+            File.WriteAllBytes(FilePath, bytes);
+            
+        }
+
+
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
