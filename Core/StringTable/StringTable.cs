@@ -9,6 +9,13 @@ namespace alan_wake_2_rmdtoc_Tool.Core.StringTable
     {
         private string _Name;
         private string _Value;
+
+        // Raw values are used when rebuilding the binary string table.
+        // Name/Value are UI/TXT-facing properties and escape line breaks as
+        // <cf>/<cr>/<lf>; using those getters while saving would write the
+        // escape markers literally into the game data.
+        public string RawName => _Name;
+        public string RawValue => _Value;
         public string Name
         {
             get
@@ -77,10 +84,10 @@ namespace alan_wake_2_rmdtoc_Tool.Core.StringTable
             for (int i = 0; i < Count; i++)
             {
                 var Entry = this[i];
-                var Bytes = Encoding.UTF8.GetBytes(Entry.Name);
+                var Bytes = Encoding.UTF8.GetBytes(Entry.RawName);
                 Stream.SetIntValue(Bytes.Length);
                 Stream.SetBytes(Bytes);
-                Bytes = Encoding.Unicode.GetBytes(Entry.Value);
+                Bytes = Encoding.Unicode.GetBytes(Entry.RawValue);
                 Stream.SetIntValue(Bytes.Length / 2);
                 Stream.SetBytes(Bytes);
             }

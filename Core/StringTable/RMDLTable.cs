@@ -55,11 +55,11 @@ namespace alan_wake_2_rmdtoc_Tool.Core.StringTable
 
 
 
-                var bytes = System.Text.Encoding.UTF8.GetBytes(Srtingtableentry.Value);
+                var bytes = System.Text.Encoding.UTF8.GetBytes(Srtingtableentry.RawValue);
                 Stream.SetIntValue(bytes.Length);
                 Stream.SetBytes(bytes);
 
-                bytes = System.Text.Encoding.UTF8.GetBytes(Srtingtableentry.Name);
+                bytes = System.Text.Encoding.UTF8.GetBytes(Srtingtableentry.RawName);
                 Stream.SetIntValue(bytes.Length);
                 Stream.SetBytes(bytes);
 
